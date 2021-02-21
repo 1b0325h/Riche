@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block body %}
+   {% if color_mode %}
+   <div id="dark">
+      <header>
+         <div id="mode">
+            <input type="button">
+            <img src="/static/img/dark_mode.png">
+         </div>
+         <div id="github">
+            <input type="button" onclick="location.href='https://github.co.jp'">
+            <img src="/static/img/dark_icon.png">
+         </div>
+   {% else %}
+   <div id="light">
+      <header>
+         <div id="mode">
+            <input type="button">
+            <img src="/static/img/light_mode.png">
+         </div>
+         <div id="github">
+            <input type="button" onclick="location.href='https://github.co.jp'">
+            <img src="/static/img/light_icon.png">
+         </div>
+   {% endif %}
+      </header>
+      <form action="/results" method="POST">
+         <input type="search" name="keywords" placeholder="Search for ..." maxlength="2048">
+      </form>
+   </div>
+{% endblock %}

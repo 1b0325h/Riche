@@ -1,0 +1,115 @@
+@charset 'utf-8';
+
+body {
+   width: 100%;
+   font-family: -apple-system, BlinkMacSystemFont, Roboto,
+      "Segoe UI", "Helvetica Neue", HelveticaNeue, YuGothic,
+      "Yu Gothic Medium", "Yu Gothic", Verdana, Meiryo, sans-serif;
+}
+
+header {
+   display: flex;
+   position: relative;
+   top: 1.4em;
+   margin-left: auto;
+   margin-right: 2.6em;
+   height: 100px;
+   width: 154px;
+   justify-content: space-between;
+   align-items: center;
+}
+
+#mode, #github {
+   display: flex;
+   position: relative;
+   justify-content: center;
+   align-items: center;
+}
+
+#mode input, #github input {
+   height: 62px;
+   width: 62px;
+   border-radius: 50%;
+}
+#mode img, #github img {
+   position: absolute;
+   pointer-events: none;
+}
+
+form {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translateY(-50%) translateX(-50%);
+   -webkit-transform: translateY(-50%) translateX(-50%);
+}
+
+input[type="search"] {
+   font-size: 18px;
+   cursor: text;
+   padding: 1.4em 3.2em;
+   width: 26em;
+   border-radius: 10em;
+}
+
+@media screen and (max-width: 736px) {
+   input[type="search"] {
+      width: 16em;
+   }
+}
+
+/* Light mode */
+#light {
+   background: #e1eaef;
+   width: 100%;
+   height: 100%;
+}
+
+#light #mode input,
+#light #github input {
+   box-shadow:  10px 10px 19px #bfc7cb,
+      -10px -10px 19px #ffffff;
+}
+
+#light input[type="search"] {
+   color: #6d7281;
+   caret-color: #6d7281;
+   box-shadow: inset 8px 8px 16px #c2c9ce,
+      inset -8px -8px 16px #ffffff;
+}
+
+#light form input::placeholder {
+   color: #9096a7;
+}
+
+#light form input::-ms-input-placeholde {
+   color: #9096a7;
+}
+
+/* Dark mode */
+#dark {
+   background: #3a3e4b;
+   width: 100%;
+   height: 100%;
+}
+
+#dark #mode input,
+#dark #github input {
+   box-shadow:  8px 8px 17px #323541,
+      -8px -8px 17px #424756;
+}
+
+#dark form input {
+   color: #e1eaef;
+   caret-color: #e1eaef;
+   box-shadow: inset 7px 7px 13px #323541,
+      inset -7px -7px 13px #424756;
+}
+
+#dark form input::placeholder {
+   color: #707789;
+}
+
+#dark form input::-ms-input-placeholde {
+   color: #707789;
+}
