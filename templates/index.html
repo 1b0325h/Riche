@@ -1,31 +1,46 @@
 {% extends "base.html" %}
 {% block body %}
-   {% if color_mode %}
+<body>
+   {% if mode %}
    <div id="dark">
       <header>
          <div id="mode">
-            <input type="button">
+            <form action="/" method="POST">
+               <input type="hidden" name="value" value="0">
+               <input type="submit" value="&nbsp;">
+            </form>
             <img src="/static/img/dark_mode.png">
          </div>
          <div id="github">
             <input type="button" onclick="location.href='https://github.com/1b0325h/Riche'">
             <img src="/static/img/dark_icon.png">
          </div>
+      </header>
+      <form action="/results" method="POST">
+         <div id="search">
+            <img src="/static/img/dark_search.png">
    {% else %}
    <div id="light">
       <header>
          <div id="mode">
-            <input type="button">
+            <form action="/" method="POST">
+               <input type="hidden" name="value" value="1">
+               <input type="submit" value="&nbsp;">
+            </form>
             <img src="/static/img/light_mode.png">
          </div>
          <div id="github">
             <input type="button" onclick="location.href='https://github.com/1b0325h/Riche'">
             <img src="/static/img/light_icon.png">
          </div>
-   {% endif %}
       </header>
       <form action="/results" method="POST">
-         <input type="search" name="keywords" placeholder="Search for ..." maxlength="2048">
+         <div id="search">
+            <img src="/static/img/light_search.png">
+   {% endif %}
+            <input type="search" name="keyword" placeholder="Search for ..." maxlength="2048">
+         </div>
       </form>
    </div>
+</body>
 {% endblock %}
