@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
-mode = 0
+mode = 1
 
 def render(mode):
    return render_template("index.html", mode=mode)
@@ -25,7 +25,6 @@ def results():
          + str(request.form["keyword"]))
    else:
       return redirect("/")
-
 
 if __name__ == "__main__":
    app.run()
