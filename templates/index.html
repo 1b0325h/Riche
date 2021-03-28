@@ -1,46 +1,64 @@
 {% extends "base.html" %}
 {% block body %}
 <body>
-   {% if mode %}
-   <div id="dark">
-      <header>
-         <div id="mode">
-            <form action="/" method="POST">
-               <input type="hidden" name="value" value="0">
-               <input type="submit" value="&nbsp;">
-            </form>
-            <img src="/static/img/dark_mode.png">
-         </div>
-         <div id="github">
-            <input type="button" onclick="location.href='https://github.com/1b0325h/Riche'">
-            <img src="/static/img/dark_icon.png">
-         </div>
-      </header>
-      <form action="/results" method="POST">
-         <div id="search">
-            <img src="/static/img/dark_search.png">
-   {% else %}
-   <div id="light">
-      <header>
-         <div id="mode">
-            <form action="/" method="POST">
-               <input type="hidden" name="value" value="1">
-               <input type="submit" value="&nbsp;">
-            </form>
-            <img src="/static/img/light_mode.png">
-         </div>
-         <div id="github">
-            <input type="button" onclick="location.href='https://github.com/1b0325h/Riche'">
-            <img src="/static/img/light_icon.png">
-         </div>
-      </header>
-      <form action="/results" method="POST">
-         <div id="search">
-            <img src="/static/img/light_search.png">
-   {% endif %}
-            <input type="search" name="keyword" placeholder="Search for ..." maxlength="2048" autocomplete="off" autofocus>
-         </div>
-      </form>
+   <div id="wrapper">
+      {% if mode %}
+      <div id="dark">
+         <header>
+            <div id="header_search">&nbsp;</div>
+            <nav>
+               <div id="mode">
+                  <form action="/" method="POST">
+                     <input type="hidden" name="value" value="0">
+                     <input type="submit" value="&nbsp;" tabindex="-1">
+                  </form>
+                  <img src="/static/img/dark_mode.png">
+                  <img src="/static/img/dark_mode_f.png"
+                     class="active">
+               </div>
+               <div id="github">
+                  <a href="https://github.com/1b0325h/Riche"
+                     tabindex="-1">
+                     Riche
+                  </a>
+               </div>
+            </nav>
+         </header>
+         <form action="/results" method="POST">
+            <div id="search">
+               <img src="/static/img/dark_search.png">
+      {% else %}
+      <div id="light">
+         <header>
+            <div id="header_search">&nbsp;</div>
+            <nav>
+               <div id="mode">
+                  <form action="/" method="POST">
+                     <input type="hidden" name="value" value="1">
+                     <input type="submit" value="&nbsp;" tabindex="-1">
+                  </form>
+                  <img src="/static/img/light_mode.png">
+                  <img src="/static/img/light_mode_f.png"
+                     class="active">
+               </div>
+               <div id="github">
+                  <a href="https://github.com/1b0325h/Riche"
+                     tabindex="-1">
+                     Riche
+                  </a>
+               </div>
+            </nav>
+         </header>
+         <form action="/results" method="POST">
+            <div id="search">
+               <img src="/static/img/light_search.png">
+      {% endif %}
+               <input type="search" name="keyword"
+                  placeholder="Search for ..." maxlength="2048"
+                  autocomplete="off" tabindex="1" autofocus>
+            </div>
+         </form>
+      </div>
    </div>
 </body>
 {% endblock %}

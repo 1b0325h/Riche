@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block body %}
+<body>
+   {% if mode %}
+   <div id="dark">
+      <header>
+         <form action="/results" method="POST">
+            <div id="header_search">
+               <img src="/static/img/dark_search.png">
+               <input type="search" name="keyword"
+                  placeholder="Search for ..." value="{{ value }}"
+                  onfocus="this.select();" maxlength="2048"
+                  autocomplete="off" tabindex="11">
+            </div>
+         </form>
+         <nav>
+            <div id="mode">
+               <form action="/" method="POST">
+                  <input type="hidden" name="value" value="0">
+                  <input type="submit" value="&nbsp;" tabindex="-1">
+               </form>
+               <img src="/static/img/dark_mode.png">
+               <img src="/static/img/dark_mode_f.png" class="active">
+            </div>
+            <div id="github">
+               <a href="https://github.com/1b0325h/Riche"
+                  tabindex="-1">
+                  Riche
+               </a>
+            </div>
+         </nav>
+      </header>
+   {% else %}
+   <div id="light">
+      <header>
+         <form action="/results" method="POST">
+            <div id="header_search">
+               <img src="/static/img/light_search.png">
+               <input type="search" name="keyword"
+                  placeholder="Search for ..." value="{{ value }}"
+                  onfocus="this.select();" maxlength="2048"
+                  autocomplete="off" tabindex="11">
+            </div>
+         </form>
+         <nav>
+            <div id="mode">
+               <form action="/" method="POST">
+                  <input type="hidden" name="value" value="1">
+                  <input type="submit" value="&nbsp;" tabindex="-1">
+               </form>
+               <img src="/static/img/light_mode.png">
+               <img src="/static/img/light_mode_f.png" class="active">
+            </div>
+            <div id="github">
+               <a href="https://github.com/1b0325h/Riche"
+                  tabindex="-1">
+                  Riche
+               </a>
+            </div>
+         </nav>
+      </header>
+   {% endif %}
+      <ol>
+      {% for i in range(iter): %}
+         <a id="dashboard" href="{{ link[i] }}"
+            tabindex="{{ i+1 }}">
+            <li>
+               <h2>{{ title[i] }}</h2>
+               <p id="link">{{ url[i] }}</p>
+               <p id="snippet">{{ snippet[i] }}</p>
+            </li>
+         </a>
+      {% endfor %}
+      </ol>
+   </div>
+</body>
+{% endblock %}
