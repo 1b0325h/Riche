@@ -1,10 +1,10 @@
 import unicodedata
 import time
+import urllib.parse
 
 from flask import Flask, render_template, request, redirect
 from bs4 import BeautifulSoup
 import requests
-import urllib.parse
 
 
 app = Flask(__name__)
