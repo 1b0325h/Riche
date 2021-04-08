@@ -29,7 +29,7 @@ def search(keyword):
       si = urllib.parse.unquote(urllib.parse.unquote(si))
       if "http://" in si or "https://" in si:
          try:
-            ri = requests.get(si, headers=headers, timeout=5.0)
+            ri = requests.get(si, headers=headers, timeout=1.0)
             t = ri.elapsed.total_seconds()
             timeln("- {} *({})".format(t, si))
             ri.encoding = "utf-8"
