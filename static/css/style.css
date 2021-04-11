@@ -170,22 +170,21 @@ ol {
 
 #light input[type="search"] {
    color: #303336;
-   caret-color: #b3bfd2;
-   background: #ecf5fa;
-   border: 1px solid #ddeaf0;
+   caret-color: #303336;
+   background: #e2edf3;
 }
 
 #light input[type="search"]::placeholder {
-   color: #b3bfd2;
+   color: #8791a2;
 }
 
 #light input[type="search"]::-ms-input-placeholde {
-   color: #b3bfd2;
+   color: #8791a2;
 }
 
 #light #dashboard:hover,
 #light #dashboard:focus {
-   background: #ecf5fa;
+   background: #e2edf3;
    outline: none;
 }
 
@@ -216,22 +215,21 @@ ol {
 
 #dark input[type="search"] {
    color: #e3edf7;
-   caret-color: #5c6269;
-   background: #2d3136;
-   border: 1px solid #3e4349;
+   caret-color: #e3edf7;
+   background: #2f3338;
 }
 
 #dark input[type="search"]::placeholder {
-   color: #5c6269;
+   color: #687179;
 }
 
 #dark input[type="search"]::-ms-input-placeholde {
-   color: #5c6269;
+   color: #687179;
 }
 
 #dark #dashboard:hover,
 #dark #dashboard:focus {
-   background: #2d3136;
+   background: #2f3338;
    outline: none;
 }
 
