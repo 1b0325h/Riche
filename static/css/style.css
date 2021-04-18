@@ -9,11 +9,11 @@ body {
 }
 
 #arnadj0 body {
-   background-color: #ffffff;
+   background-color: #ECEFF4;
 }
 
 #arnadj1 body {
-   background-color: #212325;
+   background-color: #2E3440;
 }
 
 #wrapper {
@@ -39,6 +39,7 @@ header {
    width: 13px;
    height: 13px;
    margin-left: 7px;
+   pointer-events: none;
 }
 
 #header_search input[type="search"] {
@@ -97,6 +98,11 @@ nav {
    transition: 0.3s;
 }
 
+#mode:focus,
+#github:focus {
+   outline: none;
+}
+
 #wrapper form[action="/results"] {
    position: absolute;
    top: 50%;
@@ -148,97 +154,127 @@ ol {
 }
 
 #link {
-   color: #458fb9;
+   color: #7192b9;
 }
 
 /* Light mode */
 
 #light {
-   background: #ffffff;
+   background: #ECEFF4;
    width: 100%;
    height: 100%;
 }
 
 #light #github {
-   color: #b3bfd2;
+   color: #c7cdda;
 }
 
 #light #github:hover {
-   color: #818c9c;
-   border-bottom: 1px solid #818c9c;
+   color: #3B4252;
+   border-bottom: 1px solid #3B4252;
 }
 
 #light input[type="search"] {
-   color: #303336;
-   caret-color: #303336;
-   background: #e2edf3;
+   color: #2E3440;
+   caret-color: #2E3440;
+   background: #E5E9F0;
+   box-shadow: rgba(156, 166, 187, 0.35) 0 3px 6px 0;
+}
+
+#light input[type="search"]:hover,
+#light input[type="search"]:focus {
+   box-shadow: rgba(156, 166, 187, 0.35) 0 6px 12px 0;
 }
 
 #light input[type="search"]::placeholder {
-   color: #8791a2;
+   color: #9ca3b3;
 }
 
 #light input[type="search"]::-ms-input-placeholde {
-   color: #8791a2;
+   color: #9ca3b3;
+}
+
+#light #header_search input[type="search"] {
+   box-shadow:  rgba(156, 166, 187, 0.226) 0 1px 3px 0;
+}
+
+#light #header_search input[type="search"]:hover,
+#light #header_search input[type="search"]:focus {
+   box-shadow:  rgba(156, 166, 187, 0.226) 0 2px 6px 0;
 }
 
 #light #dashboard:hover,
 #light #dashboard:focus {
-   background: #e2edf3;
+   background: #D8DEE9;
    outline: none;
 }
 
 #light #dashboard h2 {
-   color: #303336;
+   color: #2E3440;
 }
 
 #light #snippet {
-   color: #818c9c;
+   color: #4C566A;
 }
 
 /* Dark mode */
 
 #dark {
-   background: #212325;
+   background: #2E3440;
    width: 100%;
    height: 100%;
 }
 
 #dark #github {
-   color: #5c6269;
+   color: #505a6e;
 }
 
 #dark #github:hover {
-   color: #909499;
-   border-bottom: 1px solid #909499;
+   color: #D8DEE9;
+   border-bottom: 1px solid #D8DEE9;
 }
 
 #dark input[type="search"] {
-   color: #e3edf7;
-   caret-color: #e3edf7;
-   background: #2f3338;
+   color: #ECEFF4;
+   caret-color: #ECEFF4;
+   background: #3B4252;
+   box-shadow: rgba(15, 17, 21, 0.2) 0 3px 6px 0;
+}
+
+#dark input[type="search"]:hover,
+#dark input[type="search"]:focus {
+   box-shadow: rgba(15, 17, 21, 0.2) 0 6px 12px 0;
 }
 
 #dark input[type="search"]::placeholder {
-   color: #687179;
+   color: #626d83;
 }
 
 #dark input[type="search"]::-ms-input-placeholde {
-   color: #687179;
+   color: #626d83;
+}
+
+#dark #header_search input[type="search"] {
+   box-shadow: rgba(15, 17, 21, 0.137) 0 1px 3px 0;
+}
+
+#dark #header_search input[type="search"]:hover,
+#dark #header_search input[type="search"]:focus {
+   box-shadow: rgba(15, 17, 21, 0.137) 0 2px 6px 0;
 }
 
 #dark #dashboard:hover,
 #dark #dashboard:focus {
-   background: #2f3338;
+   background: #3B4252;
    outline: none;
 }
 
 #dark #dashboard h2 {
-   color: #e3edf7;
+   color: #ECEFF4;
 }
 
 #dark #snippet {
-   color: #909499;
+   color: #c1c8d6;
 }
 
 @media screen and (max-width: 736px) {

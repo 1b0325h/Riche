@@ -7,7 +7,7 @@
          <form action="/results" method="POST">
             <div id="header_search">
                <img src="/static/img/dark_search.png">
-               <input type="search" name="keyword"
+               <input type="search" name="keyword" spellcheck="false"
                   placeholder="Search for ..." value="{{ value }}"
                   onfocus="this.select();" maxlength="2048"
                   autocomplete="off" tabindex="11">
@@ -36,7 +36,7 @@
          <form action="/results" method="POST">
             <div id="header_search">
                <img src="/static/img/light_search.png">
-               <input type="search" name="keyword"
+               <input type="search" name="keyword" spellcheck="false"
                   placeholder="Search for ..." value="{{ value }}"
                   onfocus="this.select();" maxlength="2048"
                   autocomplete="off" tabindex="11">
