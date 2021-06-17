@@ -1,5 +1,5 @@
-import unicodedata
 import time
+from unicodedata import east_asian_width
 import urllib.parse
 
 from flask import Flask, render_template, request, redirect
@@ -8,95 +8,99 @@ import requests
 
 
 app = Flask(__name__)
-mode = 1
+mode = True
 site = "https://www.google.co.jp/search"
-headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) A"\
-           "ppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.19"\
-           "8 Safari/537.36"}
+headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebK"\
+           "it/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36"}
 
 
 def search(keyword):
-   timeln('Search for "{}".'.format(keyword))
-   r = requests.get(site, params={"q": keyword},
-                    headers=headers, timeout=5.0)
+
+   def _logging(s):
+      cnvtime = time.strftime("%Y/%m/%d %H:%M:%S", time.strptime(time.ctime()))
+      print(f"[{cnvtime}] {s}")
+
+   def _replacement(s):
+      return s.replace("\n", "").replace("\r", "")
+
+   def _letters(s):
+      return sum(2 if east_asian_width(_) in "FWA" else 1 for _ in s)
+
+   _logging(f"Search for '{keyword}'.")
+
+   r = requests.get(site, params={"q": keyword}, headers=headers, timeout=5.0)
    soup = BeautifulSoup(r.content, "html.parser")
-   title, link, url, snippet = [[] for _ in range(4)]
+
+   titles, links, urls, snippets = [[] for _ in range(4)]
 
    yurubf = soup.select(".yuRUbf > a")
    for i in yurubf[:10]:
-      si = ri = mi = ""
-      si = i.get("href").replace("/url?q=", "").split("&sa=U")[0]
-      si = urllib.parse.unquote(urllib.parse.unquote(si))
-      if "http://" in si or "https://" in si:
+      url = entry = contents = ""
+
+      url = i.get("href").replace("/url?q=", "").split("&sa=U")[0]
+      url = urllib.parse.unquote(urllib.parse.unquote(url))
+      if "http://" in url or "https://" in url:
          try:
-            ri = requests.get(si, headers=headers, timeout=5.0)
-            t = ri.elapsed.total_seconds()
-            timeln("- {} *({})".format(t, si))
-            ri.encoding = "utf-8"
+            entry = requests.get(url, headers=headers, timeout=5.0)
+            t = entry.elapsed.total_seconds()
+            _logging(f"- {t} *({url})")
+            entry.encoding = "utf-8"
          except: continue
-         link.append(si)
-         mi = BeautifulSoup(ri.text, "html.parser")
-         if mi.select("title"):
-            title.append(replacement(mi.select("title")[0].get_text()))
-         else: title.append(si)
-         if mi.select("body"):
-            if letters((b := mi.select("body")[0].get_text())) > 200:
-               snippet.append(b[:200] + "...")
-            else: snippet.append(b)
-         else: snippet.append("...")
+         links.append(url)
 
-   for i in link:
-      if letters(i) > 72:
-         url.append(i[:42] + "...")
-      else: url.append(i)
+         contents = BeautifulSoup(entry.text, "html.parser")
 
-   return (title, link, url, snippet)
+         if contents.select("title"):
+            titles.append(_replacement(contents.select("title")[0].get_text()))
+         else:
+            titles.append(url)
 
+         if contents.select("body"):
+            if _letters((body := contents.select("body")[0].get_text())) > 200:
+               snippets.append(body[:200] + "...")
+            else:
+               snippets.append(body)
+         else:
+            snippets.append("...")
 
-def letters(text):
-   c = 0
-   for i in text:
-      if unicodedata.east_asian_width(i) in "FWA":
-         c += 2
-      else: c += 1
-   return c
+   for i in links:
+      if _letters(i) > 72:
+         urls.append(i[:42] + "...")
+      else:
+         urls.append(i)
 
-
-def replacement(s):
-   return s.replace("\n", "").replace("\r", "")
-
-
-def timeln(s):
-   cnvtime = time.strftime("%Y/%m/%d %H:%M:%S",
-                           time.strptime(time.ctime()))
-   print("[{}] {}".format(cnvtime, s))
+   return (titles, links, urls, snippets)
 
 
 def render(mode):
-   return render_template("index.html", mode=mode)
+   return render_template("index.html", mode=int(mode))
 
 
 @app.route("/", methods=["GET", "POST"])
 def index():
    global mode
    if request.method == "POST":
-      if int(request.form["value"]):
-         mode = 1
-      else: mode = 0
+      if request.form["value"] in "True":
+         mode = True
+      else:
+         mode = False
       return render(mode)
-   else: return render(mode)
+   else:
+      return render(mode)
 
 
 @app.route("/results", methods=["GET", "POST"])
 def results():
    if (keyword := request.form["keyword"]):
       if keyword[0] == "!":
-         return redirect("https://duckduckgo.com/&q=" + str(keyword))
+         return redirect(f"https://duckduckgo.com/&q={keyword}")
+      elif keyword[0] == "?":
+         return redirect(f"https://www.google.com/search?q={keyword[1:]}")
       else:
-         title, link, url, snippet = search(keyword)
-         return render_template("results.html", mode=mode, title=title,
-                                link=link, url=url, snippet=snippet,
-                                value=keyword, iter=len(title))
+         titles, links, urls, snippets = search(keyword)
+         return render_template("results.html", mode=int(mode), titles=titles,
+                                links=links, urls=urls, snippets=snippets,
+                                value=keyword, items=len(titles))
    else:
       return redirect("/")
 

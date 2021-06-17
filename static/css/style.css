@@ -8,14 +8,6 @@ body {
       "Yu Gothic Medium", "Yu Gothic", Verdana, Meiryo, sans-serif;
 }
 
-#arnadj0 body {
-   background-color: #ECEFF4;
-}
-
-#arnadj1 body {
-   background-color: #2E3440;
-}
-
 #wrapper {
    width: 100%;
    height: 100%;
@@ -149,133 +141,144 @@ ol {
    font-size: 17px;
 }
 
-#link, #snippet {
+#links, #snippet {
    font-size: 13px;
 }
 
-#link {
+#links {
    color: #7192b9;
 }
 
-/* Light mode */
 
-#light {
-   background: #ECEFF4;
-   width: 100%;
-   height: 100%;
+/* dark mode */
+
+#theme1 body {
+   background-color: #2E3440;
 }
 
-#light #github {
-   color: #c7cdda;
-}
-
-#light #github:hover {
-   color: #3B4252;
-   border-bottom: 1px solid #3B4252;
-}
-
-#light input[type="search"] {
-   color: #2E3440;
-   caret-color: #2E3440;
-   background: #E5E9F0;
-   box-shadow: rgba(156, 166, 187, 0.35) 0 3px 6px 0;
-}
-
-#light input[type="search"]:hover,
-#light input[type="search"]:focus {
-   box-shadow: rgba(156, 166, 187, 0.35) 0 6px 12px 0;
-}
-
-#light input[type="search"]::placeholder {
-   color: #9ca3b3;
-}
-
-#light input[type="search"]::-ms-input-placeholde {
-   color: #9ca3b3;
-}
-
-#light #header_search input[type="search"] {
-   box-shadow:  rgba(156, 166, 187, 0.226) 0 1px 3px 0;
-}
-
-#light #header_search input[type="search"]:hover,
-#light #header_search input[type="search"]:focus {
-   box-shadow:  rgba(156, 166, 187, 0.226) 0 2px 6px 0;
-}
-
-#light #dashboard:hover,
-#light #dashboard:focus {
-   background: #D8DEE9;
-   outline: none;
-}
-
-#light #dashboard h2 {
-   color: #2E3440;
-}
-
-#light #snippet {
-   color: #4C566A;
-}
-
-/* Dark mode */
-
-#dark {
+#theme1 #wrapper{
    background: #2E3440;
    width: 100%;
    height: 100%;
 }
 
-#dark #github {
+#theme1 #github {
    color: #505a6e;
 }
 
-#dark #github:hover {
+#theme1 #github:hover {
    color: #D8DEE9;
    border-bottom: 1px solid #D8DEE9;
 }
 
-#dark input[type="search"] {
+#theme1 input[type="search"] {
    color: #ECEFF4;
    caret-color: #ECEFF4;
    background: #3B4252;
    box-shadow: rgba(15, 17, 21, 0.2) 0 3px 6px 0;
 }
 
-#dark input[type="search"]:hover,
-#dark input[type="search"]:focus {
-   box-shadow: rgba(15, 17, 21, 0.2) 0 6px 12px 0;
+#theme1 input[type="search"]:hover,
+#theme1 input[type="search"]:focus {
+   box-shadow: rgba(15, 17, 21, 0.3) 0 6px 12px 0;
 }
 
-#dark input[type="search"]::placeholder {
+#theme1 input[type="search"]::placeholder {
    color: #626d83;
 }
 
-#dark input[type="search"]::-ms-input-placeholde {
+#theme1 input[type="search"]::-ms-input-placeholde {
    color: #626d83;
 }
 
-#dark #header_search input[type="search"] {
+#theme1 #header_search input[type="search"] {
    box-shadow: rgba(15, 17, 21, 0.137) 0 1px 3px 0;
 }
 
-#dark #header_search input[type="search"]:hover,
-#dark #header_search input[type="search"]:focus {
+#theme1 #header_search input[type="search"]:hover,
+#theme1 #header_search input[type="search"]:focus {
    box-shadow: rgba(15, 17, 21, 0.137) 0 2px 6px 0;
 }
 
-#dark #dashboard:hover,
-#dark #dashboard:focus {
+#theme1 #dashboard:hover,
+#theme1 #dashboard:focus {
    background: #3B4252;
    outline: none;
 }
 
-#dark #dashboard h2 {
+#theme1 #dashboard h2 {
    color: #ECEFF4;
 }
 
-#dark #snippet {
+#theme1 #snippet {
    color: #c1c8d6;
 }
+
+
+/* light mode */
+
+#theme0 body {
+   background-color: #E5E9F0;
+}
+
+#theme0 {
+   background: #E5E9F0;
+   width: 100%;
+   height: 100%;
+}
+
+#theme0 #github {
+   color: #c7cdda;
+}
+
+#theme0 #github:hover {
+   color: #3B4252;
+   border-bottom: 1px solid #3B4252;
+}
+
+#theme0 input[type="search"] {
+   color: #2E3440;
+   caret-color: #2E3440;
+   background: #ECEFF4;
+   box-shadow: rgba(156, 166, 187, 0.35) 0 3px 6px 0;
+}
+
+#theme0 input[type="search"]:hover,
+#theme0 input[type="search"]:focus {
+   box-shadow: rgba(156, 166, 187, 0.46) 0 6px 12px 0;
+}
+
+#theme0 input[type="search"]::placeholder {
+   color: #9ca3b3;
+}
+
+#theme0 input[type="search"]::-ms-input-placeholde {
+   color: #9ca3b3;
+}
+
+#theme0 #header_search input[type="search"] {
+   box-shadow:  rgba(156, 166, 187, 0.226) 0 1px 3px 0;
+}
+
+#theme0 #header_search input[type="search"]:hover,
+#theme0 #header_search input[type="search"]:focus {
+   box-shadow:  rgba(156, 166, 187, 0.226) 0 2px 6px 0;
+}
+
+#theme0 #dashboard:hover,
+#theme0 #dashboard:focus {
+   background: #D8DEE9;
+   outline: none;
+}
+
+#theme0 #dashboard h2 {
+   color: #2E3440;
+}
+
+#theme0 #snippet {
+   color: #4C566A;
+}
+
 
 @media screen and (max-width: 736px) {
    #search input[type="search"] {
