@@ -1,17 +1,28 @@
-import time
 from unicodedata import east_asian_width
 import urllib.parse
+import time
 
 from flask import Flask, render_template, request, redirect
+from werkzeug.datastructures import ImmutableDict
 from bs4 import BeautifulSoup
 import requests
 
 
-app = Flask(__name__)
-mode = True
-site = "https://www.google.co.jp/search"
-headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebK"\
+SITE = "https://www.google.co.jp/search"
+HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebK"\
            "it/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36"}
+
+
+class Hamlish(Flask):
+   jinja_options = ImmutableDict(extensions=["jinja2.ext.autoescape",
+                                             "jinja2.ext.with_",
+                                             "hamlish_jinja.HamlishExtension"])
+
+
+app = Hamlish(__name__)
+app.jinja_env.hamlish_enable_div_shortcut = True
+app.jinja_env.hamlish_mode = "indented"
+mode = True
 
 
 def search(keyword):
@@ -28,20 +39,20 @@ def search(keyword):
 
    _logging(f"Search for '{keyword}'.")
 
-   r = requests.get(site, params={"q": keyword}, headers=headers, timeout=5.0)
+   r = requests.get(SITE, params={"q": keyword}, headers=HEADERS, timeout=5.0)
    soup = BeautifulSoup(r.content, "html.parser")
 
    titles, links, urls, snippets = [[] for _ in range(4)]
 
    yurubf = soup.select(".yuRUbf > a")
-   for i in yurubf[:10]:
+   for i in yurubf[:7]:
       url = entry = contents = ""
 
       url = i.get("href").replace("/url?q=", "").split("&sa=U")[0]
       url = urllib.parse.unquote(urllib.parse.unquote(url))
       if "http://" in url or "https://" in url:
          try:
-            entry = requests.get(url, headers=headers, timeout=5.0)
+            entry = requests.get(url, headers=HEADERS, timeout=5.0)
             t = entry.elapsed.total_seconds()
             _logging(f"- {t} *({url})")
             entry.encoding = "utf-8"
@@ -73,7 +84,7 @@ def search(keyword):
 
 
 def render(mode):
-   return render_template("index.html", mode=int(mode))
+   return render_template("index.haml", mode=int(mode))
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -98,7 +109,7 @@ def results():
          return redirect(f"https://www.google.com/search?q={keyword[1:]}")
       else:
          titles, links, urls, snippets = search(keyword)
-         return render_template("results.html", mode=int(mode), titles=titles,
+         return render_template("results.haml", mode=int(mode), titles=titles,
                                 links=links, urls=urls, snippets=snippets,
                                 value=keyword, items=len(titles))
    else:
@@ -106,4 +117,4 @@ def results():
 
 
 if __name__ == "__main__":
-   app.run(port=50000)
+   app.run(port=50000, debug=True)

@@ -1,0 +1,22 @@
+-extends "base.haml"
+-block body
+   %body
+      %header
+         %form action="/results" method="POST"
+            #header_search
+               -if mode
+                  %img src="/static/img/dark_search.png"
+               -else
+                  %img src="/static/img/light_search.png"
+               %input type="search" name="keyword" spellcheck="false" \
+                      placeholder="Search for ..." value="{{ value }}" \
+                      onfocus="this.select();" maxlength="2048" \
+                      autocomplete="off" tabindex="11"
+         -include "nav.haml"
+      %ol
+         -for i in range(items)
+            %a id="dashboard" href="{{ links[i] }}" tabindex="{{ i+1 }}"
+               %li
+                  %h2 << {{ titles[i] }}
+                  %p#links << {{ urls[i] }}
+                  %p#snippet << {{ snippets[i] }}
