@@ -3,7 +3,7 @@ import urllib.parse
 import time
 
 from flask import Flask, render_template, request, redirect
-from werkzeug.datastructures import ImmutableDict
+from hamlish_jinja import HamlishTagExtension
 from bs4 import BeautifulSoup
 import requests
 
@@ -13,15 +13,12 @@ HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebK"\
            "it/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36"}
 
 
-class Hamlish(Flask):
-   jinja_options = ImmutableDict(extensions=["jinja2.ext.autoescape",
-                                             "jinja2.ext.with_",
-                                             "hamlish_jinja.HamlishExtension"])
+app = Flask(__name__)
 
-
-app = Hamlish(__name__)
+app.jinja_env.add_extension(HamlishTagExtension)
 app.jinja_env.hamlish_enable_div_shortcut = True
 app.jinja_env.hamlish_mode = "indented"
+
 mode = True
 
 
