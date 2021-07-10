@@ -1,0 +1,102 @@
+*
+   box-sizing: border-box
+   padding: unset
+   border: unset
+   margin: unset
+   color: inherit
+   font: inherit
+
+section, article, header, main, footer, aside, p, details, address, nav, figure, figcaption, canvas, img, video, audio, progress, fieldset, legend
+   display: block
+
+button, input, select
+   all: unset
+   display: inline-block
+   cursor: pointer
+
+button::-moz-focus-inner
+   padding: 0
+   border: 0
+
+input
+   &::-moz-focus-inner
+      padding: 0
+      border: 0
+
+   &[type="search"]
+      box-sizing: content-box
+      -webkit-appearance: textfield
+
+      &::-webkit-search-decoration,
+      &::-webkit-search-cancel-button
+         -webkit-appearance: none
+
+   &[type="number"]
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button
+         height: auto
+
+textarea
+   border-radius: 0
+   vertical-align: top
+   overflow: auto
+
+pre
+   overflow: auto
+
+ol, ul, li, dl, dt, dd
+   list-style: none
+
+table
+   border-collapse: collapse
+   border-spacing: 0
+
+hr
+   box-sizing: content-box
+   height: 0
+
+a
+   text-decoration: none
+
+   &:hover, &:active
+      text-decoration: none
+
+b
+   font-weight: bolder
+
+i
+   font-style: italic
+
+svg
+   fill: currentColor
+
+   &:not(:root)
+      overflow: hidden
+
+sup, sub
+   position: relative
+   vertical-align: middle
+   font-size: 58.3%
+   line-height: 0
+
+sup
+   top: -0.33333em
+
+sub
+   top: 0.33333em
+
+html, body
+   height: 100%
+   width: 100%
+
+html
+   font: 20px/1.5 sans-serif
+   -webkit-text-size-adjust: 100%
+   -ms-text-size-adjust: 100%
+   text-rendering: optimizeLegibility
+   -webkit-font-smoothing: subpixel-antialiased
+   text-overflow: ellipsis
+
+body
+   overflow-x: hidden
+   overflow-y: scroll

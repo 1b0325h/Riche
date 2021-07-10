@@ -3,27 +3,31 @@ import urllib.parse
 import time
 
 from flask import Flask, render_template, request, redirect
+from flask_assets import Environment, Bundle
 from hamlish_jinja import HamlishTagExtension
 from bs4 import BeautifulSoup
 import requests
 
 
-SITE = "https://www.google.co.jp/search"
-HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebK"\
-           "it/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36"}
-
-
 app = Flask(__name__)
+
+mode = True
+site = "https://www.google.co.jp/search"
+headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebK"\
+           "it/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36"}
 
 app.jinja_env.add_extension(HamlishTagExtension)
 app.jinja_env.hamlish_enable_div_shortcut = True
 app.jinja_env.hamlish_mode = "indented"
 
-mode = True
+assets = Environment(app)
+assets.url = app.static_url_path
+sass = Bundle("sass/blank.sass", "sass/style.sass",
+              filters="sass", output="css/all.css")
+assets.register("css_all", sass)
 
 
 def search(keyword):
-
    def _logging(s):
       cnvtime = time.strftime("%Y/%m/%d %H:%M:%S", time.strptime(time.ctime()))
       print(f"[{cnvtime}] {s}")
@@ -36,7 +40,7 @@ def search(keyword):
 
    _logging(f"Search for '{keyword}'.")
 
-   r = requests.get(SITE, params={"q": keyword}, headers=HEADERS, timeout=5.0)
+   r = requests.get(site, params={"q": keyword}, headers=headers, timeout=5.0)
    soup = BeautifulSoup(r.content, "html.parser")
 
    titles, links, urls, snippets = [[] for _ in range(4)]
@@ -49,7 +53,7 @@ def search(keyword):
       url = urllib.parse.unquote(urllib.parse.unquote(url))
       if "http://" in url or "https://" in url:
          try:
-            entry = requests.get(url, headers=HEADERS, timeout=5.0)
+            entry = requests.get(url, headers=headers, timeout=5.0)
             t = entry.elapsed.total_seconds()
             _logging(f"- {t} *({url})")
             entry.encoding = "utf-8"
@@ -114,4 +118,4 @@ def results():
 
 
 if __name__ == "__main__":
-   app.run(port=50000, debug=True)
+   app.run(port=50000)

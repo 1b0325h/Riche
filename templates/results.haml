@@ -9,10 +9,7 @@
                   %img src="/static/img/dark_search.png"
                -else
                   %img src="/static/img/light_search.png"
-               %input type="search" name="keyword" spellcheck="false" \
-                      placeholder="Search for ..." value="{{ value }}" \
-                      onfocus="this.select();" maxlength="2048" \
-                      autocomplete="off" tabindex="11"
+               %input type="search" name="keyword" spellcheck="false" placeholder="Search for ..." value="{{ value }}" onfocus="this.select();" maxlength="2048" autocomplete="off" tabindex="11"
          -include "nav.haml"
       %ol
          -for i in range(items)
