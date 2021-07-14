@@ -7,5 +7,5 @@
 
 ## Usage
 
-1. Next, run `python app.py` to run the server locally on your machine.
+1. Run `python app.py` to run the server locally on your machine.
 2. Open `localhost:50000` to view it in the browser.
