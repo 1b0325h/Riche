@@ -16,10 +16,12 @@ site = "https://www.google.co.jp/search"
 headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebK"\
            "it/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36"}
 
+# Hamlish settings
 app.jinja_env.add_extension(HamlishTagExtension)
 app.jinja_env.hamlish_enable_div_shortcut = True
 app.jinja_env.hamlish_mode = "indented"
 
+# Sass settings
 assets = Environment(app)
 assets.url = app.static_url_path
 sass = Bundle("sass/blank.sass", "sass/style.sass",
@@ -28,6 +30,8 @@ assets.register("css_all", sass)
 
 
 def search(keyword):
+   """Scraping with bs4"""
+
    def _logging(s):
       cnvtime = time.strftime("%Y/%m/%d %H:%M:%S", time.strptime(time.ctime()))
       print(f"[{cnvtime}] {s}")
