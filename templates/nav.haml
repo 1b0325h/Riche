@@ -1,15 +1,15 @@
 {% haml %}
 %nav
-   #mode
-      %form action="/" method="POST"
-         %input type="hidden" name="value" value="{{ not mode }}"
-         %input type="submit" value="&nbsp;" tabindex="-1"
-      -if mode
-         %img src="/static/img/dark_mode.png"
-         %img src="/static/img/dark_mode_f.png" class="active"
-      -else
-         %img src="/static/img/light_mode.png"
-         %img src="/static/img/light_mode_f.png" class="active"
-   #github
-      %a href="https://github.com/1b0325h/Riche" tabindex="-1" << Riche
+  #mode
+    %form action="/" method="POST"
+      %input type="hidden" name="value" value="{{ not mode }}"
+      %input type="submit" value="&nbsp;" tabindex="-1"
+    -if mode
+      %img src="/static/img/dark_mode.png"
+      %img src="/static/img/dark_mode_f.png" class="active"
+    -else
+      %img src="/static/img/light_mode.png"
+      %img src="/static/img/light_mode_f.png" class="active"
+  #github
+    %a href="https://github.com/1b0325h/Riche" tabindex="-1" << Riche
 {% endhaml %}

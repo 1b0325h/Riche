@@ -1,6 +1,7 @@
 @charset "utf-8"
 
 
+
 $font-size-large: 17px
 $font-size-main: 13px
 
@@ -31,196 +32,211 @@ $light-shadow-s1: rgba(156, 166, 187, 0.226) 0 1px 3px 0
 $light-shadow-s2: rgba(156, 166, 187, 0.226) 0 2px 6px 0
 
 
+
 %entire
-   width: 100%
-   height: 100%
+  width: 100%
+  height: 100%
 
 %flexible
-   display: flex
-   position: relative
+  display: flex
+  position: relative
+
 
 
 @mixin theme($bg1, $bg2, $icon1, $icon2, $text1, $text2, $text3, $shadow1, $shadow2, $shadow-s1, $shadow-s2)
-   body
-      background-color: $bg1
+  body
+    background-color: $bg1
 
-   #wrapper
-      @extend %entire
-      background: $bg1
+  #wrapper
+    @extend %entire
+    background: $bg1
 
-   #github
-      color: $icon1
+  #github
+    color: $icon1
 
-      &:hover
-         color: $icon2
-         border-bottom: 1px solid $icon2
+    &:hover
+      color: $icon2
+      border-bottom: 1px solid $icon2
 
-   input[type="search"]
-      color: $text1
-      caret-color: $text1
+  input[type="search"]
+    color: $text1
+    caret-color: $text1
+    background: $bg2
+    box-shadow: $shadow1
+
+    &:hover, &:focus
+      box-shadow: $shadow2
+
+    &::placeholder
+      color: $text3
+
+    &::-ms-input-placeholder
+      color: $text3
+
+  #header_search input[type="search"]
+    box-shadow: $shadow-s1
+
+    &:hover, &:focus
+      box-shadow: $shadow-s2
+
+  #dashboard
+    &:hover, &:focus
       background: $bg2
-      box-shadow: $shadow1
+      outline: none
 
-      &:hover, &:focus
-         box-shadow: $shadow2
+    h2
+      color: $text1
 
-      &::placeholder
-         color: $text3
+  #snippet
+    color: $text2
 
-      &::-ms-input-placeholder
-         color: $text3
-
-   #header_search input[type="search"]
-      box-shadow: $shadow-s1
-
-      &:hover, &:focus
-         box-shadow: $shadow-s2
-
-   #dashboard
-      &:hover, &:focus
-         background: $bg2
-         outline: none
-
-      h2
-         color: $text1
-
-   #snippet
-      color: $text2
 
 
 body
-   @extend %entire
-   font-family: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", "Helvetica Neue", HelveticaNeue, YuGothic, "Yu Gothic Medium", "Yu Gothic", Verdana, Meiryo, sans-serif
+  @extend %entire
+  font-family: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", "Helvetica Neue", HelveticaNeue, YuGothic, "Yu Gothic Medium", "Yu Gothic", Verdana, Meiryo, sans-serif
+
 
 #wrapper
-   @extend %entire
+  @extend %entire
 
-   form[action="/results"]
-      position: absolute
-      top: 50%
-      left: 50%
-      transform: translateY(-50%) translateX(-50%)
-      -webkit-transform: translateY(-50%) translateX(-50%)
+  form[action="/results"]
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translateY(-50%) translateX(-50%)
+    -webkit-transform: translateY(-50%) translateX(-50%)
+
 
 header
-   @extend %flexible
-   top: 28px
+  @extend %flexible
+  top: 28px
+
 
 #header_search
-   @extend %flexible
-   margin-left: 40px
-   align-items: center
+  @extend %flexible
+  margin-left: 40px
+  align-items: center
 
-   img
-      position: absolute
-      width: 13px
-      height: 13px
-      margin-left: 7px
-      pointer-events: none
+  img
+    position: absolute
+    width: 13px
+    height: 13px
+    margin-left: 7px
+    pointer-events: none
 
-   input[type="search"]
-      font-size: $font-size-main
-      width: 226px
-      padding: 5px 16px 5px 25px
-      cursor: text
-      border-radius: 50px
-      transition: $transition-main
+  input[type="search"]
+    font-size: $font-size-main
+    width: 226px
+    padding: 5px 16px 5px 25px
+    cursor: text
+    border-radius: 50px
+    transition: $transition-main
+
 
 nav
-   @extend %flexible
-   height: 30px
-   width: 94px
-   margin-right: 52px
-   margin-left: auto
-   justify-content: space-between
-   align-items: center
-   transition: $transition-main
+  @extend %flexible
+  height: 30px
+  width: 94px
+  margin-right: 52px
+  margin-left: auto
+  justify-content: space-between
+  align-items: center
+  transition: $transition-main
+
 
 #mode
-   height: 26px
-   width: 26px
-   position: relative
+  height: 26px
+  width: 26px
+  position: relative
 
-   input, img
-      height: 26px
-      width: 26px
+  input, img
+    height: 26px
+    width: 26px
 
-   form
-      position: absolute
+  form
+    position: absolute
 
-   img
-      position: absolute
-      pointer-events: none
-      transition: $transition-main
+  img
+    position: absolute
+    pointer-events: none
+    transition: $transition-main
 
-   .active
-      opacity: 0
+  .active
+    opacity: 0
 
-   &:hover .active
-      opacity: 1
+  &:hover .active
+    opacity: 1
 
-   &:focus
-      outline: none
+  &:focus
+    outline: none
+
 
 #github
-   font-size: $font-size-large
-   position: flex
-   transition: $transition-main
+  font-size: $font-size-large
+  position: flex
+  transition: $transition-main
 
-   &:focus
-      outline: none
+  &:focus
+    outline: none
+
 
 #search
-   @extend %flexible
-   align-items: center
+  @extend %flexible
+  align-items: center
 
-   img
-      position: absolute
-      margin-left: 17px
-      pointer-events: none
+  img
+    position: absolute
+    margin-left: 17px
+    pointer-events: none
 
-   input[type="search"]
-      font-size: $font-size-large
-      width: 520px
-      padding: 18px 44px
-      cursor: text
-      border-radius: 50px
-      transition: $transition-main
+  input[type="search"]
+    font-size: $font-size-large
+    width: 520px
+    padding: 18px 44px
+    cursor: text
+    border-radius: 50px
+    transition: $transition-main
+
 
 ol
-   padding: 54px 0 40px 0
+  padding: 54px 0 40px 0
+
 
 #dashboard
-   display: block
-   width: 562px
-   margin: 0 auto 24px auto
-   padding: 18px
-   border-radius: 16px
-   transition: $transition-main
+  display: block
+  width: 562px
+  margin: 0 auto 24px auto
+  padding: 18px
+  border-radius: 16px
+  transition: $transition-main
 
-   h2
-      font-size: $font-size-large
+  h2
+    font-size: $font-size-large
+
 
 #links, #snippet
-   font-size: $font-size-main
+  font-size: $font-size-main
+
 
 #links
-   color: #7192b9
+  color: #7192b9
 
 
 // dark mode
 #theme1
-   @include theme($dark-bg1, $dark-bg2, $dark-icon1, $dark-icon2, $dark-text1, $dark-text2, $dark-text3, $dark-shadow1, $dark-shadow2, $dark-shadow-s1, $dark-shadow-s2)
+  @include theme($dark-bg1, $dark-bg2, $dark-icon1, $dark-icon2, $dark-text1, $dark-text2, $dark-text3, $dark-shadow1, $dark-shadow2, $dark-shadow-s1, $dark-shadow-s2)
 
 
 // light mode
 #theme0
-   @include theme($light-bg1, $light-bg2, $light-icon1, $light-icon2, $light-text1, $light-text2, $light-text3, $light-shadow1, $light-shadow2, $light-shadow-s1, $light-shadow-s2)
+  @include theme($light-bg1, $light-bg2, $light-icon1, $light-icon2, $light-text1, $light-text2, $light-text3, $light-shadow1, $light-shadow2, $light-shadow-s1, $light-shadow-s2)
+
 
 
 @media screen and (max-width: 736px)
-   #search input[type="search"]
-      width: 300px
+  #search input[type="search"]
+    width: 300px
 
-   #dashboard
-      width: 380px
+  #dashboard
+    width: 380px
