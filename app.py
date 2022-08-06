@@ -1,23 +1,20 @@
-import time
-from unicodedata import east_asian_width
-import urllib.parse
+import os
 
-from bs4 import BeautifulSoup
+from dotenv import load_dotenv
 from flask import Flask, render_template, request, redirect
 from flask_assets import Environment, Bundle
+from googleapiclient.discovery import build
 from hamlish_jinja import HamlishTagExtension
-import requests
-
-
-
-SITE = "https://www.google.co.jp/search"
-HEADER = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebK"\
-          "it/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36"}
 
 
 
 app = Flask(__name__)
 mode = True
+
+# dotenv
+load_dotenv(".env")
+API_KEY = os.environ.get("API_KEY")
+SEARCH_ENGINE_ID = os.environ.get("SEARCH_ENGINE_ID")
 
 # Hamlish settings
 app.jinja_env.add_extension(HamlishTagExtension)
@@ -34,60 +31,19 @@ assets.register("css_all", sass)
 
 
 def search(keyword):
-    def _logging(s):
-        cnvtime = time.strftime("%Y/%m/%d %H:%M:%S",
-                                time.strptime(time.ctime()))
-        print(f"[{cnvtime}] {s}")
-
-    def _replace(s):
-        return s.replace("\n", "").replace("\r", "")
-
-    def _letters(s):
-        return sum(2 if east_asian_width(_) in "FWA" else 1 for _ in s)
-
-    _logging(f"Search for '{keyword}'.")
-
-    r = requests.get(SITE, params={"q": keyword}, headers=HEADER, timeout=7.0)
-    soup = BeautifulSoup(r.content, "html.parser")
+    service = build("customsearch", "v1", developerKey=API_KEY)
+    response = service.cse().list(q=keyword,
+                                  cx=SEARCH_ENGINE_ID,
+                                  lr="lang_ja",
+                                  num=10,
+                                  start=1).execute()
 
     titles, links, urls, snippets = [[] for _ in range(4)]
-
-    yurubf = soup.select(".yuRUbf > a")
-    for i in yurubf[:7]:
-        url = entry = contents = ""
-
-        url = i.get("href").replace("/url?q=", "").split("&sa=U")[0]
-        url = urllib.parse.unquote(urllib.parse.unquote(url))
-        if "http://" in url or "https://" in url:
-            try:
-                entry = requests.get(url, headers=HEADER, timeout=7.0)
-                t = entry.elapsed.total_seconds()
-                _logging(f"- {t} *({url})")
-                entry.encoding = "utf-8"
-            except:
-                continue
-            links.append(url)
-
-            contents = BeautifulSoup(entry.text, "html.parser")
-
-            if contents.select("title"):
-                titles.append(_replace(contents.select("title")[0].get_text()))
-            else:
-                titles.append(url)
-
-            if contents.select("body"):
-                if _letters(body := contents.select("body")[0].get_text()) > 200:
-                    snippets.append(body[:200] + "...")
-                else:
-                    snippets.append(body)
-            else:
-                snippets.append("...")
-
-    for i in links:
-        if _letters(i) > 72:
-            urls.append(i[:42] + "...")
-        else:
-            urls.append(i)
+    for i in response["items"]:
+        titles.append(i["title"])
+        links.append(i["link"])
+        urls.append(i["formattedUrl"])
+        snippets.append(i["snippet"])
 
     return titles, links, urls, snippets
 

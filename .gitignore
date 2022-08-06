@@ -1,6 +1,5 @@
-__pycache__/
+.env
+.webassets-cache
 build/
-dist/
-*.spec
-.webassets-cache/
 css/
+dist/
