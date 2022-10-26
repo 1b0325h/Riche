@@ -1,3 +1,5 @@
+<samp>
+
 # Riche
 
 Simplify your search results with the Custom Search API.
@@ -27,3 +29,5 @@ Adding it to Startup will run in the background when PC is started.
 ### How to search
 
 Type in the search box and Enter to simply display results. If you prefix your search keyword with `?` at the beginning of a search term will redirect you to Google search results page. `!` You can use DuckDuckGo Bang command to redirect to DuckDuckGo search results page.
+
+</samp>
